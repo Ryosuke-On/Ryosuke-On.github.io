@@ -1,0 +1,11 @@
+# app-ads.txt をクロールさせるための明示的な許可。
+# 仕様上は robots.txt が無ければ全許可だが、AdMob の検証が通らない事例が複数報告されているため明示する。
+# Google-adstxt は AdMob の app-ads.txt 専用クローラー（AdMob公式ヘルプに記載）
+User-agent: Google-adstxt
+Disallow:
+
+User-agent: Mediapartners-Google
+Disallow:
+
+User-agent: *
+Disallow:
