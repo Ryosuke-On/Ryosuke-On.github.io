@@ -34,9 +34,8 @@
     a { color: var(--accent); text-decoration: none; overflow-wrap: anywhere; }
     a:hover { text-decoration: underline; }
 
-    /* プロフィール：SNS のプロフィール欄風。カバーはアプリのヘッダー色 */
-    .cover { height: 150px; background: var(--bg-header);
-      background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size: 14px 14px; }
+    /* プロフィール：SNS のプロフィール欄風。カバーは風景写真（読み込み前はアプリのヘッダー色） */
+    .cover { height: clamp(120px, 33vw, 260px); background: var(--bg-header) url("cover.jpg") center 62% / cover no-repeat; }
     .profile { max-width: 760px; margin: 0 auto; padding: 0 16px; }
     .profile .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
     .avatar { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; margin-top: -64px;
@@ -98,7 +97,7 @@
   </style>
 </head>
 <body>
-<div class="cover"></div>
+<div class="cover" role="img" aria-label="山並みと街を見下ろす風景"></div>
 <section class="profile">
   <div class="row">
     <img class="avatar" src="avatar.jpg" alt="大野亮祐のプロフィール写真" width="128" height="128">
