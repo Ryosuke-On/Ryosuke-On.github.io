@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大野亮祐 | Ryosuke Ono</title>
+  <meta name="description" content="大野亮祐（奈良先端科学技術大学院大学）の個人ページ。LLMエージェントとの対話における「間」と話し方の研究。">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #fbfaf7; --fg: #1f1f1f; --muted: #6b6b6b; --line: #e4e1da;
+      --accent: #b4532a; --card: #ffffff; --tag: #f1e6df;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #151515; --fg: #ededed; --muted: #a0a0a0; --line: #2e2e2e; --accent: #e48a5e; --card: #1c1c1c; --tag: #3a2a22; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Helvetica Neue", sans-serif;
+      line-height: 1.8; }
+    main { max-width: 760px; margin: 0 auto; padding: 56px 16px 72px; }
+    header h1 { margin: 0; font-size: 32px; letter-spacing: .02em; line-height: 1.3; }
+    header .en { color: var(--muted); font-size: 16px; margin-top: 2px; }
+    header .aff { margin-top: 14px; }
+    nav.links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font-size: 15px; }
+    a { color: var(--accent); text-decoration: none; overflow-wrap: anywhere; }
+    a:hover { text-decoration: underline; }
+    h2 { font-size: 19px; margin: 48px 0 14px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+    h3.sub { font-size: 15px; margin: 24px 0 10px; color: var(--muted); font-weight: 600; }
+    p { margin: 0 0 12px; }
+    .muted { color: var(--muted); font-size: 14px; }
+    ul.pubs { list-style: none; padding: 0; margin: 0; }
+    ul.pubs li { margin-bottom: 16px; }
+    ul.pubs .title { font-weight: 600; }
+    .tag { display: inline-block; font-size: 12px; padding: 0 8px; border-radius: 999px; background: var(--tag); color: var(--accent); margin-left: 6px; vertical-align: 2px; line-height: 1.8; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+    .card h3 { margin: 0 0 4px; font-size: 16px; }
+    .card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .card .where { margin-top: 8px; font-size: 13px; }
+    footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>大野 亮祐</h1>
+    <div class="en">Ryosuke Ono</div>
+    <div class="aff">奈良先端科学技術大学院大学 先端科学技術研究科 情報科学領域<br>
+      <span class="muted">Division of Information Science, Nara Institute of Science and Technology (NAIST)</span></div>
+    <nav class="links">
+      <a href="https://github.com/Ryosuke-On">GitHub</a>
+      <a href="https://orcid.org/0009-0009-2714-3806">ORCID</a>
+    </nav>
+  </header>
+
+  <h2>研究</h2>
+  <p>AIとの対話における<strong>「間」</strong>と<strong>話し方</strong>を研究しています。いつでも即答し、決していなくならないAIは、窓口のようなリズムを持ち、ユーザーを「お客さん」の位置に置いてしまいます。対等な相手として感じられるには、言葉づかいと応答のタイミングがそろっている必要があるのではないか──という問いから、ローカルLLMで動く日記・メンターアプリを作って確かめています。</p>
+  <p>以前は、モデル検査（NuSMV）の検証結果と反例を、BERTなどの自然言語処理モデルで予測する研究に取り組んでいました。</p>
+
+  <h2>発表</h2>
+
+  <h3 class="sub">国際会議</h3>
+  <ul class="pubs">
+    <li>
+      <div class="title">Registers Have Rhythms: Crossing Speech Style with Reply Timing in an LLM Journaling Agent<span class="tag">査読有り</span></div>
+      <div>Ryosuke Ono, Hiroki Ouchi</div>
+      <div class="muted">Proceedings of the 14th International Conference on Human-Agent Interaction (HAI '26), Osaka, Japan, November 2026.
+        DOI: <a href="https://doi.org/10.1145/3841580.3845675">10.1145/3841580.3845675</a></div>
+    </li>
+  </ul>
+
+  <h3 class="sub">国内発表</h3>
+  <ul class="pubs">
+    <li>
+      <div class="title">「間」を置いて既読をつける関西弁AIメンターが自己省察に与える影響の検討</div>
+      <div>大野亮祐</div>
+      <div class="muted">第25回情報科学技術フォーラム（FIT2026）, 2026</div>
+    </li>
+    <li>
+      <div class="title">関西弁による方言対話と階層的「間」のUXを備えたローカルLLMメンターアプリの提案</div>
+      <div>大野亮祐</div>
+      <div class="muted">X-ICT2S3 2026 Spring Workshop, 2026</div>
+    </li>
+    <li>
+      <div class="title">自然言語処理モデルBERTを用いたNuSMVの検証結果予測と反例生成：真偽判定の再現実験による評価と構文解析情報に基づく生成モデルの構築<span class="tag">査読有り</span></div>
+      <div>大野亮祐, 小形優人, 張江洋次朗</div>
+      <div class="muted">X-ICT2S3 2026 Winter: Symposium and Workshop, 2026</div>
+    </li>
+    <li>
+      <div class="title">モデル検査における反例予測精度向上のための構文解析結果の導入</div>
+      <div>大野亮祐, 張江洋次朗</div>
+      <div class="muted">X-ICT2S3 2025 Autumn Workshop, 2025</div>
+    </li>
+    <li>
+      <div class="title">NuSMVを用いたモデル検査における構文則に着目した反例予測手法の提案</div>
+      <div>大野亮祐, 張江洋次朗</div>
+      <div class="muted">X-ICT2S3 2025 Summer Meeting, 2025</div>
+    </li>
+    <li>
+      <div class="title">特定のNuSMVモデルに対するBERTを用いた反例予測</div>
+      <div>大野亮祐, 張江洋次朗</div>
+      <div class="muted">X-ICT2S3 2025 Winter Workshop, 2025</div>
+    </li>
+    <li>
+      <div class="title">自然言語処理モデルを利用したソフトウェア検証分野における反例予測</div>
+      <div>大野亮祐, 張江洋次朗</div>
+      <div class="muted">第23回情報科学技術フォーラム（FIT2024）, 2024</div>
+    </li>
+    <li>
+      <div class="title">BERTを利用したソフトウェア検証分野における反例予測</div>
+      <div>大野亮祐, 張江洋次朗</div>
+      <div class="muted">X-ICT2S3 2024 Summer Meeting, 2024</div>
+    </li>
+  </ul>
+  <p class="muted">X-ICT2S3: Cross-Sectoral Information Exchange in the ICT Field Toward Sustainable and Smart Society</p>
+
+  <h2>公開中のアプリ</h2>
+  <div class="grid">
+    <div class="card">
+      <h3><a href="https://apps.apple.com/jp/app/meg-route-%E3%82%81%E3%81%90%E3%83%AB%E3%83%BC%E3%83%88/id6802613980">MEG Route - めぐルート</a></h3>
+      <p>車で出かける前に、ルート上の危険な場所と立ち寄り先をまとめて確認できる予習アプリ。</p>
+      <p class="where">App Store ・ <a href="../index.html">プライバシーポリシー</a> ・ <a href="../support.html">サポート</a></p>
+    </div>
+    <div class="card">
+      <h3><a href="https://chromewebstore.google.com/detail/fodipgpaenifggcjnbmnmkkljdkjecif">UNIPA Assignment Sync</a></h3>
+      <p>UNIPAの課題を自動で抽出し、Googleカレンダーとスプレッドシートに同期する拡張機能。</p>
+      <p class="where">Chrome ウェブストア ・ <a href="https://github.com/Ryosuke-On/unipa-assignment-sync">GitHub</a></p>
+    </div>
+  </div>
+
+  <h2>プロジェクト</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>FrAIend Memory</h3>
+      <p>チャットで続くAI日記。関西弁と「間」をもつローカルLLMの話し相手（研究用プロトタイプ）。</p>
+    </div>
+    <div class="card">
+      <h3><a href="https://github.com/Ryosuke-On/gramophonify">gramophonify</a></h3>
+      <p>音声を1880〜1930年代の蓄音機録音風に変換するmacOSアプリ。</p>
+    </div>
+    <div class="card">
+      <h3><a href="https://github.com/Ryosuke-On/Mac-Preview-Agent">Mac-Preview-Agent</a></h3>
+      <p>Claude Codeのチャットサイドバー付きmacOSファイルビューア。</p>
+    </div>
+    <div class="card">
+      <h3><a href="https://github.com/Ryosuke-On/japan-road-hazards">japan-road-hazards</a></h3>
+      <p>OpenStreetMapから抽出した日本の多車線信号交差点・踏切データ（ODbL）。</p>
+    </div>
+    <div class="card">
+      <h3><a href="https://github.com/Ryosuke-On/cartoon-classics-radio-pipeline">cartoon-classics-radio</a></h3>
+      <p>パブリックドメインのスーザ行進曲を24時間YouTubeラジオにするパイプライン。</p>
+    </div>
+    <div class="card">
+      <h3><a href="https://github.com/Ryosuke-On/apple-music-discord">apple-music-discord</a></h3>
+      <p>Apple Musicの再生状況をDiscordに表示（macOS）。</p>
+    </div>
+  </div>
+
+  <footer>© 2026 Ryosuke Ono</footer>
+</main>
+</body>
+</html>
