@@ -15,7 +15,7 @@
       --text-main: #111b21; --text-sub: #667781; --border: #d1d7db;
       --date-bg: #ffffff; --date-color: #54656f;
       --accent: #128c7e; --tag-bg: #e7f6f2; --tag-fg: #0a7c62;
-      --shadow: 0 1px 1px rgba(0,0,0,0.1);
+      --shadow: 0 1px 1px rgba(0,0,0,0.1); --link: #0b57d0;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -24,7 +24,7 @@
         --text-main: #e9edef; --text-sub: #8696a0; --border: #2a3942;
         --date-bg: #182229; --date-color: #8696a0;
         --accent: #00a884; --tag-bg: #0f3a33; --tag-fg: #7fe0c4;
-        --shadow: 0 1px 1px rgba(0,0,0,0.3);
+        --shadow: 0 1px 1px rgba(0,0,0,0.3); --link: #8ab4f8;
       }
     }
     * { box-sizing: border-box; }
@@ -77,6 +77,7 @@
     .bubble.se  { align-self: flex-end;   background: var(--bg-green); border-bottom-right-radius: 0; }
     .bubble.hai { align-self: flex-start; background: var(--bg-white); border-bottom-left-radius: 0; }
     .bubble .title { font-weight: 600; font-size: 15px; }
+    .bubble .title a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
     .bubble .authors { font-size: 14px; margin-top: 2px; }
     .bubble .venue { font-size: 12.5px; color: var(--text-sub); margin-top: 4px; text-align: right; }
     .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--text-sub); margin-bottom: 4px; }
