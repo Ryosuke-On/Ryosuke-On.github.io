@@ -5,67 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>大野亮祐 | Ryosuke Ono</title>
   <meta name="description" content="大野亮祐（奈良先端科学技術大学院大学）の個人ページ。LLMベースの自動プログラム修正とテスト品質、AIとの対話における「間」の研究。">
+  <meta name="theme-color" content="#075e54">
   <style>
+    /* 配色は FrAIend Memory アプリ（frontend/style.css）に合わせる */
     :root {
       color-scheme: light dark;
-      --bg: #fbfaf7; --fg: #1f1f1f; --muted: #6b6b6b; --line: #e4e1da;
-      --accent: #b4532a; --card: #ffffff; --tag: #f1e6df;
+      --bg-app: #efeae2; --bg-header: #075e54; --bg-card: #ffffff;
+      --bg-green: #d9fdd3; --bg-white: #ffffff;
+      --text-main: #111b21; --text-sub: #667781; --border: #d1d7db;
+      --date-bg: #ffffff; --date-color: #54656f;
+      --accent: #128c7e; --tag-bg: #e7f6f2; --tag-fg: #0a7c62;
+      --shadow: 0 1px 1px rgba(0,0,0,0.1);
     }
     @media (prefers-color-scheme: dark) {
-      :root { --bg: #151515; --fg: #ededed; --muted: #a0a0a0; --line: #2e2e2e; --accent: #e48a5e; --card: #1c1c1c; --tag: #3a2a22; }
+      :root {
+        --bg-app: #0b141a; --bg-header: #1f2c34; --bg-card: #202c33;
+        --bg-green: #005c4b; --bg-white: #202c33;
+        --text-main: #e9edef; --text-sub: #8696a0; --border: #2a3942;
+        --date-bg: #182229; --date-color: #8696a0;
+        --accent: #00a884; --tag-bg: #0f3a33; --tag-fg: #7fe0c4;
+        --shadow: 0 1px 1px rgba(0,0,0,0.3);
+      }
     }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--fg);
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Helvetica Neue", sans-serif;
+    body { margin: 0; background: var(--bg-app); color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Segoe UI", sans-serif;
       line-height: 1.8; }
-    main { max-width: 760px; margin: 0 auto; padding: 56px 16px 72px; }
-    header h1 { margin: 0; font-size: 32px; letter-spacing: .02em; line-height: 1.3; }
-    header .en { color: var(--muted); font-size: 16px; margin-top: 2px; }
-    header .aff { margin-top: 14px; }
-    nav.links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font-size: 15px; }
     a { color: var(--accent); text-decoration: none; overflow-wrap: anywhere; }
     a:hover { text-decoration: underline; }
-    h2 { font-size: 19px; margin: 48px 0 14px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
-    h3.sub { font-size: 15px; margin: 24px 0 10px; color: var(--muted); font-weight: 600; }
+
+    .top { background: var(--bg-header); color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+    .top .inner { max-width: 760px; margin: 0 auto; padding: 44px 16px 28px; }
+    .top h1 { margin: 0; font-size: 30px; letter-spacing: .02em; line-height: 1.3; }
+    .top .en { opacity: .8; font-size: 15px; margin-top: 2px; }
+    .top .aff { margin-top: 14px; font-size: 15px; }
+    .top .aff .sub { opacity: .75; font-size: 13px; }
+    .top a { color: #fff; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,255,255,.5); }
+    .top nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .top nav a { text-decoration: none; font-size: 14px; padding: 2px 12px; border-radius: 999px; background: rgba(255,255,255,.14); }
+    .top nav a:hover { background: rgba(255,255,255,.24); }
+
+    main { max-width: 760px; margin: 0 auto; padding: 8px 16px 72px; }
+    h2 { font-size: 18px; margin: 44px 0 14px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+    h3.sub { font-size: 15px; margin: 22px 0 8px; color: var(--text-sub); font-weight: 600; }
     p { margin: 0 0 12px; }
-    .muted { color: var(--muted); font-size: 14px; }
-    ul.pubs { list-style: none; padding: 0; margin: 0; }
-    ul.pubs li { margin-bottom: 16px; }
-    ul.pubs .title { font-weight: 600; }
-    .tag { display: inline-block; font-size: 12px; padding: 0 8px; border-radius: 999px; background: var(--tag); color: var(--accent); margin-left: 6px; vertical-align: 2px; line-height: 1.8; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
-    .card h3 { margin: 0 0 4px; font-size: 16px; }
-    .card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
-    .card .where { margin-top: 8px; font-size: 13px; }
+    .muted { color: var(--text-sub); font-size: 14px; }
+
+    .tag { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 0 8px; border-radius: 999px;
+      background: var(--tag-bg); color: var(--tag-fg); margin-left: 6px; vertical-align: 2px; line-height: 1.8; white-space: nowrap; }
+
+    /* 発表：アプリと同じ吹き出し。SE系は緑・右寄せ、HAI系は白・左寄せ */
+    .chat { display: flex; flex-direction: column; gap: 8px; }
+    .date-label { text-align: center; margin: 14px 0 4px; }
+    .date-label span { background: var(--date-bg); color: var(--date-color); font-size: 12px;
+      padding: 3px 12px; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+    .bubble { max-width: 86%; padding: 9px 13px 7px; border-radius: 10px; box-shadow: var(--shadow); line-height: 1.6; }
+    .bubble.se  { align-self: flex-end;   background: var(--bg-green); border-bottom-right-radius: 0; }
+    .bubble.hai { align-self: flex-start; background: var(--bg-white); border-bottom-left-radius: 0; }
+    .bubble .title { font-weight: 600; font-size: 15px; }
+    .bubble .authors { font-size: 14px; margin-top: 2px; }
+    .bubble .venue { font-size: 12.5px; color: var(--text-sub); margin-top: 4px; text-align: right; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--text-sub); margin-bottom: 4px; }
+    .legend i { display: inline-block; width: 14px; height: 11px; border-radius: 4px; margin-right: 6px; vertical-align: -1px; box-shadow: var(--shadow); }
+    .legend .se i  { background: var(--bg-green); border-bottom-right-radius: 0; }
+    .legend .hai i { background: var(--bg-white); border-bottom-left-radius: 0; }
+
     dl.cv { display: grid; grid-template-columns: 5.5em 1fr; gap: 6px 16px; margin: 0; }
-    dl.cv dt { color: var(--muted); font-variant-numeric: tabular-nums; }
+    dl.cv dt { color: var(--text-sub); font-variant-numeric: tabular-nums; }
     dl.cv dd { margin: 0; }
     ul.plain { margin: 0; padding-left: 1.2em; }
-    footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+    .card { background: var(--bg-card); border-radius: 10px; padding: 13px 15px; box-shadow: var(--shadow); }
+    .card h3 { margin: 0 0 4px; font-size: 15.5px; }
+    .card p { margin: 0; font-size: 14px; color: var(--text-sub); line-height: 1.6; }
+    .card .where { margin-top: 8px; font-size: 13px; }
+    footer { margin-top: 56px; color: var(--text-sub); font-size: 13px; text-align: center; }
   </style>
 </head>
 <body>
-<main>
-  <header>
+<div class="top">
+  <div class="inner">
     <h1>大野 亮祐</h1>
     <div class="en">Ryosuke Ono</div>
     <div class="aff">奈良先端科学技術大学院大学 先端科学技術研究科 情報科学領域<br>
       <a href="https://sdlab.naist.jp/">ソフトウェア設計学研究室</a><br>
-      <span class="muted">Software Design and Analysis Laboratory, Division of Information Science, Nara Institute of Science and Technology (NAIST)</span></div>
-    <nav class="links">
+      <span class="sub">Software Design and Analysis Laboratory, Division of Information Science, Nara Institute of Science and Technology (NAIST)</span></div>
+    <nav>
       <a href="https://github.com/Ryosuke-On">GitHub</a>
       <a href="https://orcid.org/0009-0009-2714-3806">ORCID</a>
     </nav>
-  </header>
-
+  </div>
+</div>
+<main>
   <h2>研究</h2>
   <h3 class="sub">メイン研究：テスト品質と自動プログラム修正</h3>
   <p>LLMベースの<strong>自動プログラム修正（APR）エージェント</strong>は、テストを実行し、失敗したテストのエラーメッセージやスタックトレースからバグの箇所を絞り込み、生成した修正が正しいかもテストの成否で判断します。つまり修正精度は、テストケースがバグについてどれだけの情報を与えるかに左右されるはずです。</p>
   <p>では、テストを追加すれば修正精度は実際に上がるのか。どんなテストが効くのか。Defects4Jの全バグを対象に、既存テストへLLM生成テストを段階的に追加してRepairAgentに修正させ、修正精度と<strong>カバレッジ</strong>や<strong>ミューテーションスコア</strong>といったテスト品質指標との関係を調べています。</p>
 
   <h3 class="sub">AIとの対話における「間」と話し方</h3>
-  <p>いつでも即答し、決していなくならないAIは、窓口のようなリズムを持ち、ユーザーを「お客さん」の位置に置いてしまいます。対等な相手として感じられるには、言葉づかいと応答のタイミングがそろっている必要があるのではないか──という問いから、関西弁で話し、「間」を置いて既読をつけるローカルLLMの日記・メンターアプリを作って確かめています。</p>
+  <p>いつでも即答し、決していなくならないAIは、窓口のようなリズムを持ち、ユーザーを「お客さん」の位置に置いてしまいます。対等な相手として感じられるには、言葉づかいと応答のタイミングがそろっている必要があるのではないか──という問いから、関西弁で話し、「間」を置いて既読をつけるローカルLLMの日記・メンターアプリ <strong>FrAIend Memory</strong> を作って確かめています。</p>
 
   <h3 class="sub">学部での研究</h3>
   <p>モデル検査（NuSMV）の検証結果と反例を、BERTなどの自然言語処理モデルで予測する研究に取り組みました。</p>
@@ -77,68 +116,83 @@
   </dl>
 
   <h2>発表</h2>
+  <div class="legend">
+    <span class="se"><i></i>ソフトウェア工学</span>
+    <span class="hai"><i></i>ヒューマンエージェントインタラクション</span>
+  </div>
+  <div class="chat">
+    <div class="date-label"><span>2026</span></div>
 
-  <h3 class="sub">国際会議</h3>
-  <ul class="pubs">
-    <li>
-      <div class="title">Registers Have Rhythms: Crossing Speech Style with Reply Timing in an LLM Journaling Agent<span class="tag">査読有り</span></div>
-      <div>Ryosuke Ono, Hiroki Ouchi</div>
-      <div class="muted">Proceedings of the 14th International Conference on Human-Agent Interaction (HAI '26), Osaka, Japan, November 2026 (to appear).</div>
-    </li>
-  </ul>
-
-  <h3 class="sub">国内発表</h3>
-  <ul class="pubs">
-    <li>
+    <div class="bubble se">
       <div class="title">テスト品質指標が自動プログラム修正エージェントの修正精度に与える影響の調査</div>
-      <div>大野亮祐, 柏祐太郎, 飯田元</div>
-      <div class="muted">ソフトウェア工学の基礎ワークショップ（FOSE2026）, ポスター発表, 2026（発表予定）</div>
-    </li>
-    <li>
-      <div class="title">「間」を置いて既読をつける関西弁AIメンターが自己省察に与える影響の検討</div>
-      <div>大野亮祐</div>
-      <div class="muted">第25回情報科学技術フォーラム（FIT2026）, 2026</div>
-    </li>
-    <li>
-      <div class="title">関西弁による方言対話と階層的「間」のUXを備えたローカルLLMメンターアプリの提案</div>
-      <div>大野亮祐</div>
-      <div class="muted">X-ICT2S3 2026 Spring Workshop, 2026</div>
-    </li>
-    <li>
-      <div class="title">自然言語処理モデルBERTを用いたNuSMVの検証結果予測と反例生成：真偽判定の再現実験による評価と構文解析情報に基づく生成モデルの構築<span class="tag">査読有り</span></div>
-      <div>大野亮祐, 小形優人, 張江洋次朗</div>
-      <div class="muted">X-ICT2S3 2026 Winter: Symposium and Workshop, 2026</div>
-    </li>
-    <li>
-      <div class="title">モデル検査における反例予測精度向上のための構文解析結果の導入</div>
-      <div>大野亮祐, 張江洋次朗</div>
-      <div class="muted">X-ICT2S3 2025 Autumn Workshop, 2025</div>
-    </li>
-    <li>
-      <div class="title">NuSMVを用いたモデル検査における構文則に着目した反例予測手法の提案</div>
-      <div>大野亮祐, 張江洋次朗</div>
-      <div class="muted">X-ICT2S3 2025 Summer Meeting, 2025</div>
-    </li>
-    <li>
-      <div class="title">特定のNuSMVモデルに対するBERTを用いた反例予測</div>
-      <div>大野亮祐, 張江洋次朗</div>
-      <div class="muted">X-ICT2S3 2025 Winter Workshop, 2025</div>
-    </li>
-    <li>
-      <div class="title">自然言語処理モデルを利用したソフトウェア検証分野における反例予測</div>
-      <div>大野亮祐, 張江洋次朗</div>
-      <div class="muted">第23回情報科学技術フォーラム（FIT2024）, 2024</div>
-    </li>
-    <li>
-      <div class="title">BERTを利用したソフトウェア検証分野における反例予測</div>
-      <div>大野亮祐, 張江洋次朗</div>
-      <div class="muted">X-ICT2S3 2024 Summer Meeting, 2024</div>
-    </li>
-  </ul>
-  <p class="muted">X-ICT2S3: Cross-Sectoral Information Exchange in the ICT Field Toward Sustainable and Smart Society</p>
+      <div class="authors">大野亮祐, 柏祐太郎, 飯田元</div>
+      <div class="venue">ソフトウェア工学の基礎ワークショップ（FOSE2026）, ポスター発表（発表予定）</div>
+    </div>
 
-  <h2>受賞</h2>
+    <div class="bubble hai">
+      <div class="title">Registers Have Rhythms: Crossing Speech Style with Reply Timing in an LLM Journaling Agent<span class="tag">査読有り</span><span class="tag">国際会議</span></div>
+      <div class="authors">Ryosuke Ono, Hiroki Ouchi</div>
+      <div class="venue">Proceedings of the 14th International Conference on Human-Agent Interaction (HAI '26), Osaka, Japan, November 2026 (to appear)</div>
+    </div>
+
+    <div class="bubble hai">
+      <div class="title">「間」を置いて既読をつける関西弁AIメンターが自己省察に与える影響の検討</div>
+      <div class="authors">大野亮祐</div>
+      <div class="venue">第25回情報科学技術フォーラム（FIT2026）</div>
+    </div>
+
+    <div class="bubble hai">
+      <div class="title">関西弁による方言対話と階層的「間」のUXを備えたローカルLLMメンターアプリの提案</div>
+      <div class="authors">大野亮祐</div>
+      <div class="venue">X-ICT2S3 2026 Spring Workshop</div>
+    </div>
+
+    <div class="bubble se">
+      <div class="title">自然言語処理モデルBERTを用いたNuSMVの検証結果予測と反例生成：真偽判定の再現実験による評価と構文解析情報に基づく生成モデルの構築<span class="tag">査読有り</span></div>
+      <div class="authors">大野亮祐, 小形優人, 張江洋次朗</div>
+      <div class="venue">X-ICT2S3 2026 Winter: Symposium and Workshop</div>
+    </div>
+
+    <div class="date-label"><span>2025</span></div>
+
+    <div class="bubble se">
+      <div class="title">モデル検査における反例予測精度向上のための構文解析結果の導入</div>
+      <div class="authors">大野亮祐, 張江洋次朗</div>
+      <div class="venue">X-ICT2S3 2025 Autumn Workshop</div>
+    </div>
+
+    <div class="bubble se">
+      <div class="title">NuSMVを用いたモデル検査における構文則に着目した反例予測手法の提案</div>
+      <div class="authors">大野亮祐, 張江洋次朗</div>
+      <div class="venue">X-ICT2S3 2025 Summer Meeting</div>
+    </div>
+
+    <div class="bubble se">
+      <div class="title">特定のNuSMVモデルに対するBERTを用いた反例予測</div>
+      <div class="authors">大野亮祐, 張江洋次朗</div>
+      <div class="venue">X-ICT2S3 2025 Winter Workshop</div>
+    </div>
+
+    <div class="date-label"><span>2024</span></div>
+
+    <div class="bubble se">
+      <div class="title">自然言語処理モデルを利用したソフトウェア検証分野における反例予測</div>
+      <div class="authors">大野亮祐, 張江洋次朗</div>
+      <div class="venue">第23回情報科学技術フォーラム（FIT2024）</div>
+    </div>
+
+    <div class="bubble se">
+      <div class="title">BERTを利用したソフトウェア検証分野における反例予測</div>
+      <div class="authors">大野亮祐, 張江洋次朗</div>
+      <div class="venue">X-ICT2S3 2024 Summer Meeting</div>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:14px">X-ICT2S3: Cross-Sectoral Information Exchange in the ICT Field Toward Sustainable and Smart Society</p>
+
+  <h2>受賞・採択・出展</h2>
   <dl class="cv">
+    <dt>2026</dt><dd>デジタル学園祭2026 出展（FrAIend Memory 体験版「分身AIトーク」）</dd>
+    <dt>2026</dt><dd>関西テック・クリエイター・チャレンジ 2026 採択（FrAIend Memory｜チャットで続くAI日記）</dd>
     <dt>2026</dt><dd>X-ICT2S3 2026 Winter: Symposium and Workshop Best Conversant Award</dd>
     <dt>2026</dt><dd>金沢学院大学 学長褒賞 2件（学業成績優秀者、課外活動優秀者）</dd>
   </dl>
