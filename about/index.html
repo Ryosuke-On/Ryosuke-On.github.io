@@ -49,6 +49,7 @@
     .profile .handle { color: var(--text-sub); font-size: 14.5px; }
     .bio { margin-top: 12px; font-size: 15.5px; line-height: 1.75; }
     .bio p { margin: 0 0 8px; }
+    .bio .org { font-weight: 600; }
     .bio .hl { color: var(--accent); font-weight: 600; }
     .meta { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 10px; color: var(--text-sub); font-size: 14px; }
     .meta span { display: inline-flex; align-items: center; gap: 5px; }
@@ -64,8 +65,9 @@
     p { margin: 0 0 12px; }
     .muted { color: var(--text-sub); font-size: 14px; }
 
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 2px; }
     .tag { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 0 8px; border-radius: 999px;
-      background: var(--tag-bg); color: var(--tag-fg); margin-left: 6px; vertical-align: 2px; line-height: 1.8; white-space: nowrap; }
+      background: var(--tag-bg); color: var(--tag-fg); line-height: 1.8; white-space: nowrap; }
 
     /* 発表：アプリと同じ吹き出し。SE系は緑・右寄せ、HAI系は白・左寄せ */
     .chat { display: flex; flex-direction: column; gap: 8px; }
@@ -110,13 +112,13 @@
   <div class="handle">Ryosuke Ono ・ @Ryosuke-On</div>
 
   <div class="bio">
-    <p>NAIST ソフトウェア設計学研究室。<span class="hl">LLMエージェントがバグを自動で直すとき、テストの質はどれだけ効くのか</span>を調べています。Defects4J × RepairAgent で、カバレッジやミューテーションスコアが修正精度を予測できるかを検証中。</p>
+    <p class="org">奈良先端科学技術大学院大学<br>ソフトウェア設計学研究室</p>
+    <p><span class="hl">LLMエージェントがバグを自動で直すとき、テストの質はどれだけ効くのか</span>を調べています。Defects4J × RepairAgent で、カバレッジやミューテーションスコアが修正精度を予測できるかを検証中。</p>
     <p>もうひとつのテーマは、AIとの対話の<span class="hl">「間」と話し方</span>。関西弁で、すぐには既読をつけない日記アプリ FrAIend Memory を作っています。</p>
     <p>学部では NuSMV の反例を BERT で予測していました。</p>
   </div>
 
   <div class="meta">
-    <span><svg viewBox="0 0 24 24"><path d="M3 10l9-5 9 5-9 5-9-5z"/><path d="M7 12v4c0 1.5 2.2 3 5 3s5-1.5 5-3v-4"/></svg>奈良先端科学技術大学院大学 情報科学領域</span>
     <span><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>奈良・生駒</span>
     <span><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><a href="https://sdlab.naist.jp/">sdlab.naist.jp</a></span>
     <span><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>2024年から研究発表</span>
@@ -135,7 +137,7 @@
   <h2>学歴</h2>
   <dl class="cv">
     <dt>2026 –</dt><dd>奈良先端科学技術大学院大学 先端科学技術研究科 情報科学領域 ソフトウェア設計学研究室</dd>
-    <dt>2022 – 2026</dt><dd>金沢学院大学 経済情報学部 経済情報学科</dd>
+    <dt>2022 – 2026</dt><dd>金沢学院大学 経済情報学部</dd>
   </dl>
 
   <h2>発表</h2>
@@ -153,7 +155,8 @@
     </div>
 
     <div class="bubble hai">
-      <div class="title">Registers Have Rhythms: Crossing Speech Style with Reply Timing in an LLM Journaling Agent<span class="tag">査読有り</span><span class="tag">国際会議</span></div>
+      <div class="title">Registers Have Rhythms: Crossing Speech Style with Reply Timing in an LLM Journaling Agent</div>
+      <div class="tags"><span class="tag">査読有り</span><span class="tag">国際会議</span></div>
       <div class="authors">Ryosuke Ono, Hiroki Ouchi</div>
       <div class="venue">Proceedings of the 14th International Conference on Human-Agent Interaction (HAI '26), Osaka, Japan, November 2026 (to appear)</div>
     </div>
@@ -171,7 +174,8 @@
     </div>
 
     <div class="bubble se">
-      <div class="title">自然言語処理モデルBERTを用いたNuSMVの検証結果予測と反例生成：真偽判定の再現実験による評価と構文解析情報に基づく生成モデルの構築<span class="tag">査読有り</span></div>
+      <div class="title">自然言語処理モデルBERTを用いたNuSMVの検証結果予測と反例生成：真偽判定の再現実験による評価と構文解析情報に基づく生成モデルの構築</div>
+      <div class="tags"><span class="tag">査読有り</span></div>
       <div class="authors">大野亮祐, 小形優人, 張江洋次朗</div>
       <div class="venue">X-ICT2S3 2026 Winter: Symposium and Workshop</div>
     </div>
