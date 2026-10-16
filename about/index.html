@@ -94,7 +94,8 @@
     dl.cv dt { white-space: nowrap; color: var(--text-sub); font-variant-numeric: tabular-nums; }
     dl.cv dd { margin: 0; }
     dl.cv .note { margin-top: 6px; font-size: 14px; color: var(--text-sub); line-height: 1.7; }
-    dl.cv .note ul { margin: 4px 0 0; padding-left: 1.2em; }
+    dl.cv .note dl.terms { display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; margin: 6px 0 0; }
+    dl.cv .note dl.terms dt { white-space: nowrap; }
     ul.plain { margin: 0; padding-left: 1.2em; }
 
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
@@ -147,12 +148,13 @@
     <dt>2026 –</dt><dd>奈良先端科学技術大学院大学<br>ソフトウェア設計学研究室</dd>
     <dt>2022 – 2026</dt><dd>金沢学院大学 経済情報学部
       <div class="note">KGフロントランナープログラム（担当教員：張江洋次朗）<br>
-        授業外で研究の基礎を固める少人数の輪講に、半期ごとに継続して参加
-        <ul>
-          <li>数学：集合と位相、線形代数、微分積分（『基礎 解析学（改訂版）』矢野健太郎・石原繁）</li>
-          <li>機械学習・自然言語処理：PyTorch、自然言語処理の教科書</li>
-          <li>モデル検査技術の輪講と、FIT2024 の発表準備</li>
-        </ul>
+        授業外の少人数の輪講で、研究に必要な数学・機械学習・形式手法を学ぶ（全6コマ）
+        <dl class="terms">
+          <dt>2023 前期</dt><dd>深層学習（PyTorch）</dd>
+          <dt>2023 後期</dt><dd>集合と位相</dd>
+          <dt>2024 前期</dt><dd>自然言語処理、モデル検査（FIT2024 の発表準備）、線形代数、微分積分</dd>
+          <dt>2024 後期</dt><dd>自然言語処理、モデル検査、微分方程式、ベクトル解析、複素関数、フーリエ級数・ラプラス変換</dd>
+        </dl>
       </div></dd>
   </dl>
 
