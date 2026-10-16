@@ -104,7 +104,12 @@
     .card p { margin: 0; font-size: 14px; color: var(--text-sub); line-height: 1.6; }
     .card .where { margin-top: 8px; font-size: 13px; }
     details.hobby { margin-top: 4px; }
-    details.hobby .authors .tag { margin-right: 6px; vertical-align: 1px; }
+    details.hobby .tag-group { white-space: nowrap; }
+    details.hobby .title .tag-group { margin-left: 8px; }
+    details.hobby .title .tag-group .tag { font-weight: 600; vertical-align: 2px; }
+    details.hobby .tag-group .tag + .tag { margin-left: 6px; }
+    details.hobby .tag-group.below { margin-right: 6px; }
+    details.hobby .tag-group.below .tag { vertical-align: 1px; }
     details.hobby > summary { cursor: pointer; font-weight: 600; padding: 10px 14px; background: var(--bg-card);
       border-radius: 10px; border-bottom-right-radius: 0; box-shadow: var(--shadow); list-style: none; }
     details.hobby > summary::-webkit-details-marker { display: none; }
@@ -366,13 +371,13 @@
     <div class="chat">
       <div class="date-label"><span>2015</span></div>
       <div class="bubble se">
-        <div class="title">行進曲「自由の鐘」</div>
-        <div class="authors"><span class="tag">課題曲</span>J. P. スーザ</div>
+        <div class="title">行進曲「自由の鐘」<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">J. P. スーザ</div>
         <div class="venue">中部日本吹奏楽コンクール本大会 銀賞</div>
       </div>
       <div class="bubble se">
-        <div class="title">秘儀III -旋回舞踊のためのヘテロフォニー</div>
-        <div class="authors"><span class="tag">課題曲</span>西村朗</div>
+        <div class="title">秘儀III -旋回舞踊のためのヘテロフォニー<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">西村朗</div>
         <div class="venue">全日本吹奏楽コンクール 銀賞</div>
       </div>
       <div class="bubble se">
@@ -387,8 +392,8 @@
         <div class="venue">北陸アンサンブルコンテスト 銀賞</div>
       </div>
       <div class="bubble se">
-        <div class="title">スペインの市場で</div>
-        <div class="authors"><span class="tag">課題曲</span>山本雅一</div>
+        <div class="title">スペインの市場で<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">山本雅一</div>
         <div class="venue">北陸吹奏楽コンクール 金賞</div>
       </div>
       <div class="bubble hai">
@@ -403,8 +408,8 @@
         <div class="venue">演奏会</div>
       </div>
       <div class="bubble se">
-        <div class="title">スケルツァンド</div>
-        <div class="authors"><span class="tag">課題曲</span>江原大介</div>
+        <div class="title">スケルツァンド<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">江原大介</div>
         <div class="venue">北陸吹奏楽コンクール 銀賞</div>
       </div>
       <div class="bubble se">
@@ -414,18 +419,18 @@
       </div>
       <div class="date-label"><span>2018</span></div>
       <div class="bubble hai">
-        <div class="title">バレエ音楽「マ・メール・ロワ」</div>
-        <div class="authors"><span class="tag">編曲委嘱初演</span>M. ラヴェル</div>
+        <div class="title">バレエ音楽「マ・メール・ロワ」<span class="tag-group"><span class="tag">編曲委嘱初演</span></span></div>
+        <div class="authors">M. ラヴェル</div>
         <div class="venue">演奏会</div>
       </div>
       <div class="bubble se">
-        <div class="title">行進曲「双頭の鷲の旗の下に」</div>
-        <div class="authors"><span class="tag">課題曲</span>J. F. ワーグナー</div>
+        <div class="title">行進曲「双頭の鷲の旗の下に」<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">J. F. ワーグナー</div>
         <div class="venue">中部日本吹奏楽コンクール 石川県大会 銀賞</div>
       </div>
       <div class="bubble se">
-        <div class="title">コンサート・マーチ「虹色の未来へ」</div>
-        <div class="authors"><span class="tag">課題曲</span>郷間幹男</div>
+        <div class="title">コンサート・マーチ「虹色の未来へ」<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">郷間幹男</div>
         <div class="venue">北陸吹奏楽コンクール 銀賞</div>
       </div>
       <div class="bubble se">
@@ -434,8 +439,8 @@
         <div class="venue">北陸吹奏楽コンクール 銀賞</div>
       </div>
       <div class="bubble hai">
-        <div class="title">ユーフォニアム協奏曲</div>
-        <div class="authors"><span class="tag">作曲者編</span>J. ホロヴィッツ</div>
+        <div class="title">ユーフォニアム協奏曲<span class="tag-group"><span class="tag">作曲者編</span></span></div>
+        <div class="authors">J. ホロヴィッツ</div>
         <div class="venue">演奏会</div>
       </div>
       <div class="bubble hai">
@@ -450,8 +455,8 @@
         <div class="venue">石川県アンサンブルコンテスト 金賞</div>
       </div>
       <div class="bubble se">
-        <div class="title">マーチ・グリーン・フォレスト</div>
-        <div class="authors"><span class="tag">課題曲</span>内藤淳一</div>
+        <div class="title">マーチ・グリーン・フォレスト<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">内藤淳一</div>
         <div class="venue">いしかわ吹奏楽コンクール新人戦 銀賞</div>
       </div>
       <div class="bubble se">
@@ -470,13 +475,13 @@
         <div class="venue">演奏会</div>
       </div>
       <div class="bubble se">
-        <div class="title">行進曲「空軍士官候補生」</div>
-        <div class="authors"><span class="tag">課題曲</span>K. L. キング</div>
+        <div class="title">行進曲「空軍士官候補生」<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">K. L. キング</div>
         <div class="venue">中部日本吹奏楽コンクール 石川県大会 銀賞</div>
       </div>
       <div class="bubble se">
-        <div class="title">マーチ「エイプリル・リーフ」</div>
-        <div class="authors"><span class="tag">課題曲</span>近藤悠介</div>
+        <div class="title">マーチ「エイプリル・リーフ」<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">近藤悠介</div>
         <div class="venue">北陸吹奏楽コンクール 銀賞</div>
       </div>
       <div class="bubble se">
@@ -485,14 +490,14 @@
         <div class="venue">北陸吹奏楽コンクール 銀賞</div>
       </div>
       <div class="bubble hai">
-        <div class="title">オーボエ協奏曲</div>
-        <div class="authors"><span class="tag">編曲委嘱初演</span>W. A. モーツァルト</div>
+        <div class="title">オーボエ協奏曲<span class="tag-group"><span class="tag">編曲委嘱初演</span></span></div>
+        <div class="authors">W. A. モーツァルト</div>
         <div class="venue">演奏会</div>
       </div>
       <div class="date-label"><span>2020</span></div>
       <div class="bubble se">
-        <div class="title">マーチ・エイプリル・メイ</div>
-        <div class="authors"><span class="tag">課題曲</span>矢部政男</div>
+        <div class="title">マーチ・エイプリル・メイ<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">矢部政男</div>
         <div class="venue">いしかわ吹奏楽コンクール新人戦 銀賞</div>
       </div>
       <div class="bubble se">
@@ -501,14 +506,14 @@
         <div class="venue">いしかわ吹奏楽コンクール新人戦 銀賞</div>
       </div>
       <div class="bubble hai">
-        <div class="title">群青</div>
-        <div class="authors"><span class="tag">編曲委嘱初演</span><span class="tag">動画制作主任</span>小田美樹</div>
+        <div class="title">群青<span class="tag-group"><span class="tag">編曲委嘱初演</span><span class="tag">動画制作主任</span></span></div>
+        <div class="authors">小田美樹</div>
         <div class="venue">いしかわ吹奏楽コンサート WEB総選挙 第2位</div>
       </div>
       <div class="date-label"><span>2022</span></div>
       <div class="bubble se">
-        <div class="title">やまがたふぁんたじぃ ～吹奏楽のための～</div>
-        <div class="authors"><span class="tag">課題曲</span>杉浦邦弘</div>
+        <div class="title">やまがたふぁんたじぃ ～吹奏楽のための～<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">杉浦邦弘</div>
         <div class="venue">石川県吹奏楽コンクール 銀賞</div>
       </div>
       <div class="bubble se">
@@ -523,8 +528,8 @@
       </div>
       <div class="date-label"><span>2023</span></div>
       <div class="bubble se">
-        <div class="title">行進曲「煌めきの朝」</div>
-        <div class="authors"><span class="tag">課題曲</span>牧野圭吾</div>
+        <div class="title">行進曲「煌めきの朝」<span class="tag-group"><span class="tag">課題曲</span></span></div>
+        <div class="authors">牧野圭吾</div>
         <div class="venue">石川県吹奏楽コンクール 銀賞</div>
       </div>
       <div class="bubble hai">
@@ -533,8 +538,8 @@
         <div class="venue">石川県吹奏楽コンクール 銀賞</div>
       </div>
       <div class="bubble se">
-        <div class="title">二つのソナタ</div>
-        <div class="authors"><span class="tag">指導</span>D. シュペール</div>
+        <div class="title">二つのソナタ<span class="tag-group"><span class="tag">指導</span></span></div>
+        <div class="authors">D. シュペール</div>
         <div class="venue">石川県アンサンブルコンテスト 銀賞</div>
       </div>
       <div class="date-label"><span>2024</span></div>
@@ -544,12 +549,38 @@
         <div class="venue">いしかわ吹奏楽コンクール新人戦 優秀賞</div>
       </div>
       <div class="bubble se">
-        <div class="title">ウェントス</div>
-        <div class="authors"><span class="tag">指導</span>石毛里佳</div>
+        <div class="title">ウェントス<span class="tag-group"><span class="tag">指導</span></span></div>
+        <div class="authors">石毛里佳</div>
         <div class="venue">北陸アンサンブルコンテスト 銅賞</div>
       </div>
     </div>
   </details>
+  <script>
+    // 曲名＋タグが1行に収まらないときは、タグを作曲者の行へ移す
+    (function () {
+      var box = document.querySelector('details.hobby');
+      if (!box) return;
+      function layout() {
+        if (!box.open) return;
+        box.querySelectorAll('.bubble').forEach(function (b) {
+          var title = b.querySelector('.title'), authors = b.querySelector('.authors');
+          var group = b.querySelector('.tag-group');
+          if (!group) return;
+          title.appendChild(group);
+          group.classList.remove('below');
+          var lh = parseFloat(getComputedStyle(title).lineHeight);
+          if (title.getBoundingClientRect().height > lh * 1.5) {
+            authors.insertBefore(group, authors.firstChild);
+            group.classList.add('below');
+          }
+        });
+      }
+      box.addEventListener('toggle', layout);
+      var t;
+      window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(layout, 100); });
+      layout();
+    })();
+  </script>
 
   <footer>© 2026 Ryosuke Ono</footer>
 </main>
