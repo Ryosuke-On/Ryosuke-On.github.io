@@ -37,16 +37,19 @@
     /* プロフィール：SNS のプロフィール欄風。カバーは風景写真（読み込み前はアプリのヘッダー色） */
     .cover { height: clamp(120px, 33vw, 260px); background: var(--bg-header) url("cover.jpg") center 62% / cover no-repeat; }
     .profile { max-width: 760px; margin: 0 auto; padding: 0 16px; }
-    .profile .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .profile .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
     .avatar { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; margin-top: -64px;
       border: 4px solid var(--bg-app); background: var(--bg-card); display: block; }
-    .actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding-top: 12px; }
-    .actions .break { flex-basis: 100%; height: 0; }
+    .actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding-bottom: 6px; }
     .actions a { font-size: 14px; font-weight: 600; padding: 5px 16px; border-radius: 999px; text-decoration: none;
       border: 1px solid var(--border); color: var(--text-main); background: var(--bg-card); }
     .actions a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
     .actions a:hover { filter: brightness(1.05); text-decoration: none; }
-    .profile h1 { margin: 12px 0 0; font-size: 24px; line-height: 1.3; }
+    .profile .name-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; }
+    .profile h1 { margin: 0; font-size: 24px; line-height: 1.3; }
+    .lang { flex: none; font-size: 14px; font-weight: 600; padding: 4px 14px; border-radius: 999px; text-decoration: none;
+      border: 1px solid var(--border); color: var(--text-main); background: var(--bg-card); }
+    .lang:hover { filter: brightness(1.05); text-decoration: none; }
     .profile .role { font-size: 15px; font-weight: 600; margin-top: 2px; }
     .profile .handle { color: var(--text-sub); font-size: 14.5px; }
     .bio { margin-top: 12px; font-size: 15.5px; line-height: 1.75; }
@@ -138,11 +141,12 @@
     <div class="actions">
       <a class="primary" href="https://github.com/Ryosuke-On">GitHub</a>
       <a href="https://orcid.org/0009-0009-2714-3806">ORCID</a>
-      <span class="break"></span>
-      <a href="en/">English</a>
     </div>
   </div>
-  <h1>大野 亮祐</h1>
+  <div class="name-row">
+    <h1>大野 亮祐</h1>
+    <a class="lang" href="en/" hreflang="en" lang="en">English</a>
+  </div>
   <div class="role">ナラティブ・エンジニア</div>
   <div class="handle">Ryosuke Ono ・ @Ryosuke-On</div>
 
