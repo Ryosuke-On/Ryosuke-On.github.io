@@ -9,3 +9,5 @@ Disallow:
 
 User-agent: *
 Disallow:
+
+Sitemap: https://ryosuke-on.github.io/sitemap.xml
