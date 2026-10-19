@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ryosuke Ono | 大野亮祐</title>
+  <meta name="description" content="Personal page of Ryosuke Ono (Nara Institute of Science and Technology): research on test quality in LLM-based automated program repair, and on pauses (“ma”) in conversations with AI.">
+  <meta name="theme-color" content="#075e54">
+  <style>
+    /* 配色は FrAIend Memory アプリ（frontend/style.css）に合わせる */
+    :root {
+      color-scheme: light dark;
+      --bg-app: #efeae2; --bg-header: #075e54; --bg-card: #ffffff;
+      --bg-green: #d9fdd3; --bg-white: #ffffff;
+      --text-main: #111b21; --text-sub: #667781; --border: #d1d7db;
+      --date-bg: #ffffff; --date-color: #54656f;
+      --accent: #128c7e; --tag-bg: #e7f6f2; --tag-fg: #0a7c62;
+      --shadow: 0 1px 1px rgba(0,0,0,0.1); --link: #0b57d0;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-app: #0b141a; --bg-header: #1f2c34; --bg-card: #202c33;
+        --bg-green: #005c4b; --bg-white: #202c33;
+        --text-main: #e9edef; --text-sub: #8696a0; --border: #2a3942;
+        --date-bg: #182229; --date-color: #8696a0;
+        --accent: #00a884; --tag-bg: #0f3a33; --tag-fg: #7fe0c4;
+        --shadow: 0 1px 1px rgba(0,0,0,0.3); --link: #8ab4f8;
+      }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg-app); color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Segoe UI", sans-serif;
+      line-height: 1.8; }
+    a { color: var(--accent); text-decoration: none; overflow-wrap: anywhere; }
+    a:hover { text-decoration: underline; }
+
+    /* プロフィール：SNS のプロフィール欄風。カバーは風景写真（読み込み前はアプリのヘッダー色） */
+    .cover { height: clamp(120px, 33vw, 260px); background: var(--bg-header) url("../cover.jpg") center 62% / cover no-repeat; }
+    .profile { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+    .profile .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+    .avatar { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; margin-top: -64px;
+      border: 4px solid var(--bg-app); background: var(--bg-card); display: block; }
+    .actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding-bottom: 6px; }
+    .actions a { font-size: 14px; font-weight: 600; padding: 5px 16px; border-radius: 999px; text-decoration: none;
+      border: 1px solid var(--border); color: var(--text-main); background: var(--bg-card); }
+    .actions a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .actions a:hover { filter: brightness(1.05); text-decoration: none; }
+    .profile h1 { margin: 12px 0 0; font-size: 24px; line-height: 1.3; }
+    .profile .role { font-size: 15px; font-weight: 600; margin-top: 2px; }
+    .profile .handle { color: var(--text-sub); font-size: 14.5px; }
+    .bio { margin-top: 12px; font-size: 15.5px; line-height: 1.75; }
+    .bio p { margin: 0 0 8px; }
+    .bio .org { font-weight: 600; }
+    .meta { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 10px; color: var(--text-sub); font-size: 14px; }
+    .meta span { display: inline-flex; align-items: center; gap: 5px; }
+    .meta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+    .stats { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 8px; font-size: 14px; color: var(--text-sub); }
+    .stats b { color: var(--text-main); font-size: 15px; margin-right: 3px; }
+    .hashtags { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 10px; font-size: 14px; color: var(--text-sub); }
+    .profile .divider { border: 0; border-top: 1px solid var(--border); margin: 18px 0 0; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 8px 16px 72px; }
+    h2 { font-size: 18px; margin: 44px 0 14px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+    h3.sub { font-size: 15px; margin: 22px 0 8px; color: var(--text-sub); font-weight: 600; }
+    p { margin: 0 0 12px; }
+    .muted { color: var(--text-sub); font-size: 14px; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 2px; }
+    .tag { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 0 8px; border-radius: 999px;
+      background: var(--tag-bg); color: var(--tag-fg); line-height: 1.8; white-space: nowrap; }
+
+    /* 発表：アプリと同じ吹き出し。SE系は緑・右寄せ、HAI系は白・左寄せ */
+    .chat { display: flex; flex-direction: column; gap: 8px; }
+    .date-label { text-align: center; margin: 14px 0 4px; }
+    .date-label span { background: var(--date-bg); color: var(--date-color); font-size: 12px;
+      padding: 3px 12px; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+    .bubble { max-width: 86%; padding: 9px 13px 7px; border-radius: 10px; box-shadow: var(--shadow); line-height: 1.6; }
+    .msg { display: flex; align-items: flex-end; gap: 6px; max-width: 92%; }
+    .msg.se  { align-self: flex-end; flex-direction: row-reverse; }
+    .msg.hai { align-self: flex-start; }
+    .msg .bubble { max-width: none; min-width: 0; }
+    .msg .time { flex: none; font-size: 11.5px; color: var(--text-sub); padding-bottom: 2px; white-space: nowrap; }
+    .bubble.se  { background: var(--bg-green); border-bottom-right-radius: 0; }
+    .bubble.hai { background: var(--bg-white); border-bottom-left-radius: 0; }
+    .bubble .title { font-weight: 600; font-size: 15px; }
+    .bubble .title a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+    .bubble .authors { font-size: 14px; margin-top: 2px; }
+    .bubble .venue { font-size: 12.5px; color: var(--text-sub); margin-top: 4px; text-align: right; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--text-sub); margin-bottom: 4px; }
+    .legend i { display: inline-block; width: 14px; height: 11px; border-radius: 4px; margin-right: 6px; vertical-align: -1px; box-shadow: var(--shadow); }
+    .legend .se i  { background: var(--bg-green); border-bottom-right-radius: 0; }
+    .legend .hai i { background: var(--bg-white); border-bottom-left-radius: 0; }
+
+    dl.cv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; }
+    dl.cv dt { white-space: nowrap; color: var(--text-sub); font-variant-numeric: tabular-nums; }
+    dl.cv dd { margin: 0; }
+    dl.cv .note { margin-top: 6px; font-size: 14px; color: var(--text-sub); line-height: 1.7; }
+    dl.cv .note dl.terms { display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; margin: 6px 0 0; }
+    dl.cv .note dl.terms dt { white-space: nowrap; }
+    ul.plain { margin: 0; padding-left: 1.2em; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+    .card { background: var(--bg-card); border-radius: 10px; border-bottom-right-radius: 0; padding: 13px 15px; box-shadow: var(--shadow); }
+    .card h3 { margin: 0 0 4px; font-size: 15.5px; }
+    .card p { margin: 0; font-size: 14px; color: var(--text-sub); line-height: 1.6; }
+    .card .where { margin-top: 8px; font-size: 13px; }
+    details.hobby { margin-top: 4px; }
+    details.hobby + details.hobby { margin-top: 10px; }
+    details.hobby .title .tag-group { margin-left: 8px; white-space: nowrap; }
+    details.hobby .title .tag { vertical-align: 2px; }
+    details.hobby .tag + .tag { margin-left: 6px; }
+    details.hobby .authors .tag:last-of-type { margin-right: 6px; }
+    details.hobby .authors .tag { vertical-align: 1px; }
+    details.hobby > summary { cursor: pointer; font-weight: 600; padding: 10px 14px; background: var(--bg-card);
+      border-radius: 10px; border-bottom-right-radius: 0; box-shadow: var(--shadow); list-style: none; }
+    details.hobby > summary::-webkit-details-marker { display: none; }
+    details.hobby > summary::before { content: "▸"; display: inline-block; width: 1.2em; color: var(--text-sub); transition: transform .15s; }
+    details.hobby[open] > summary::before { transform: rotate(90deg); }
+    details.hobby[open] > summary { margin-bottom: 14px; }
+    .chat > .bubble.se  { align-self: flex-end; }
+    .chat > .bubble.hai { align-self: flex-start; }
+    .grid.apps { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .card.app { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+    .card.app .shot { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-bottom: 1px solid var(--border); }
+    .card.app .shot-link { display: block; }
+    .card.app h3 { margin: 12px 15px 4px; }
+    .card.app p { margin: 0 15px; }
+    .card.app .where { margin: 8px 15px 14px; }
+    footer { margin-top: 56px; color: var(--text-sub); font-size: 13px; text-align: center; }
+  </style>
+</head>
+<body>
+<div class="cover" role="img" aria-label="A view over mountains and a town"></div>
+<section class="profile">
+  <div class="row">
+    <img class="avatar" src="../avatar.jpg" alt="Profile photo of Ryosuke Ono" width="128" height="128">
+    <div class="actions">
+      <a class="primary" href="https://github.com/Ryosuke-On">GitHub</a>
+      <a href="https://orcid.org/0009-0009-2714-3806">ORCID</a>
+      <a href="../">日本語</a>
+    </div>
+  </div>
+  <h1>Ryosuke Ono</h1>
+  <div class="role">Narrative Engineer</div>
+  <div class="handle">大野 亮祐 ・ @Ryosuke-On</div>
+
+  <div class="bio">
+    <p class="org">Nara Institute of Science and Technology (NAIST)<br>Software Design and Analysis Laboratory</p>
+    <p>I study how much test quality matters when LLM agents fix bugs on their own. With Defects4J and RepairAgent, I am testing whether coverage and mutation score can predict how accurately the agent repairs a bug.</p>
+    <p>My other theme is the pause (<i>ma</i>) and speech style in conversations with AI. I am building FrAIend Memory, a journaling app that talks in Kansai dialect and doesn’t mark your messages as read right away.</p>
+    <p>As an undergraduate, I used BERT to predict the results of the NuSMV model checker (whether a property holds, and the counterexample if not). The idea is to sidestep the cost of state explosion with approximate prediction, so that model checking becomes easier to adopt.</p>
+  </div>
+
+  <div class="meta">
+    <span><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Kanazawa, Ishikawa → Ikoma, Nara</span>
+    <span><svg viewBox="0 0 24 24"><path d="M4 20h16v-7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7z"/><path d="M4 15c1.5 1 3 1 4 0s2.5-1 4 0 3 1 4 0 2.5-1 4 0"/><path d="M12 11V8"/><path d="M12 5.5c.8 0 1.3-.6 1.3-1.3S12 2 12 2s-1.3 1.5-1.3 2.2.5 1.3 1.3 1.3z"/></svg>Born November 2002</span>
+    <span><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><a href="https://sdlab.naist.jp/">sdlab.naist.jp</a></span>
+    <span><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Presenting research since 2024</span>
+  </div>
+  <div class="stats">
+    <span><b>10</b>presentations</span>
+    <span><b>1</b>international conference</span>
+    <span><b>2</b>peer-reviewed</span>
+  </div>
+  <div class="hashtags">
+    <span>#AutomatedProgramRepair</span><span>#SoftwareTesting</span><span>#LLMAgents</span><span>#HAI</span><span>#ConversationalPauses</span>
+  </div>
+  <hr class="divider">
+</section>
+<main>
+  <h2>Education</h2>
+  <dl class="cv">
+    <dt>2026 –</dt><dd>Nara Institute of Science and Technology<br>Software Design and Analysis Laboratory</dd>
+    <dt>2022 – 2026</dt><dd>Kanazawa Gakuin University, Faculty of Economic Informatics</dd>
+  </dl>
+
+  <h2>Presentations</h2>
+  <div class="legend">
+    <span class="se"><i></i>Software engineering</span>
+    <span class="hai"><i></i>Human-agent interaction</span>
+  </div>
+  <div class="chat">
+    <div class="date-label"><span>2026</span></div>
+
+
+    <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">Registers Have Rhythms: Crossing Speech Style with Reply Timing in an LLM Journaling Agent</div>
+        <div class="tags"><span class="tag">Peer-reviewed</span><span class="tag">International</span></div>
+        <div class="authors">Ryosuke Ono, Hiroki Ouchi</div>
+        <div class="venue">Proceedings of the 14th International Conference on Human-Agent Interaction (HAI '26), Osaka, Japan, November 2026 (to appear)</div>
+      </div>
+      <span class="time">Nov</span>
+    </div>
+
+
+    <div class="msg se">
+      <div class="bubble se">
+        <div class="title">An Investigation of the Impact of Test Quality Metrics on the Repair Accuracy of Automated Program Repair Agents</div>
+        <div class="authors">Ryosuke Ono, Yutaro Kashiwa, Hajimu Iida</div>
+        <div class="venue">Workshop on Foundation of Software Engineering (FOSE2026), poster (to appear)</div>
+      </div>
+      <span class="time">Nov</span>
+    </div>
+
+
+    <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">A Kansai-Dialect AI Mentor That Pauses Before Marking as Read: Examining the Impact on Self-Reflection</div>
+        <div class="authors">Ryosuke Ono</div>
+        <div class="venue">The 25th Forum on Information Technology (FIT2026)</div>
+      </div>
+      <span class="time">Sep</span>
+    </div>
+
+
+    <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">Proposal of a Local-LLM-Based Mentor Application with Kansai Dialect Dialogue and Layered Asynchronous UX</div>
+        <div class="authors">Ryosuke Ono</div>
+        <div class="venue">X-ICT2S3 2026 Spring Workshop</div>
+      </div>
+      <span class="time">May</span>
+    </div>
+
+
+    <div class="msg se">
+      <div class="bubble se">
+        <div class="title"><a href="https://researchmap.jp/y-harie/misc/52945404/attachment_file.pdf">Predicting Verification Results and Generating Counterexamples in NuSMV Using BERT: Reproducibility Analysis and Syntax-Guided Model Construction</a></div>
+        <div class="tags"><span class="tag">Peer-reviewed</span></div>
+        <div class="authors">Ryosuke Ono, Yuto Ogata, Yojiro Harie</div>
+        <div class="venue">X-ICT2S3 2026 Winter: Symposium and Workshop, Vol.2026-XICT-9, No.1, pp.21–28</div>
+      </div>
+      <span class="time">Feb</span>
+    </div>
+
+    <div class="date-label"><span>2025</span></div>
+
+
+    <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Enhancing Counterexample Prediction through Syntax Analysis</div>
+        <div class="authors">Ryosuke Ono, Yojiro Harie</div>
+        <div class="venue">X-ICT2S3 2025 Autumn Workshop</div>
+      </div>
+      <span class="time">Nov</span>
+    </div>
+
+
+    <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Proposal of a Counterexample Prediction Method Focusing on Syntax Rules in Model Checking with NuSMV</div>
+        <div class="authors">Ryosuke Ono, Yojiro Harie</div>
+        <div class="venue">X-ICT2S3 2025 Summer Meeting</div>
+      </div>
+      <span class="time">Aug</span>
+    </div>
+
+
+    <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Predicting Counter Examples for a Specific NuSMV Model by Using BERT</div>
+        <div class="authors">Ryosuke Ono, Yojiro Harie</div>
+        <div class="venue">X-ICT2S3 2025 Winter Workshop</div>
+      </div>
+      <span class="time">Jan</span>
+    </div>
+
+    <div class="date-label"><span>2024</span></div>
+
+
+    <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Prediction of Counter Examples in the Field of Software Verification by Using BERT</div>
+        <div class="authors">Ryosuke Ono, Yojiro Harie</div>
+        <div class="venue">X-ICT2S3 2024 Summer Meeting</div>
+      </div>
+      <span class="time">Sep</span>
+    </div>
+
+
+    <div class="msg se">
+      <div class="bubble se">
+        <div class="title"><a href="https://www.ieice.org/publications/conferences/bin/pdf_link.php?fname=CB-002.pdf&amp;year=2024&amp;ConfCd=F&amp;id=FIT0000016510&amp;lang=J">Prediction of Counter Examples in the Field of Software Verification by Using NLP Models</a></div>
+        <div class="authors">Ryosuke Ono, Yojiro Harie</div>
+        <div class="venue">The 23rd Forum on Information Technology (FIT2024)</div>
+      </div>
+      <span class="time">Sep</span>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:14px"><a href="https://sites.google.com/view/xict2s3/home">X-ICT2S3</a>: Cross-Sectoral Information Exchange in the ICT Field Toward Sustainable and Smart Society</p>
+
+  <h2>Awards, Grants &amp; Exhibitions</h2>
+  <dl class="cv">
+    <dt>2026</dt><dd>Exhibited at Digital Gakuensai 2026 (FrAIend Memory demo: “Alter-Ego AI Talk”)</dd>
+    <dt>2026</dt><dd>Selected for Kansai Tech Creator Challenge 2026 (FrAIend Memory: an AI diary that continues in chat)</dd>
+    <dt>2026</dt><dd>X-ICT2S3 2026 Winter: Symposium and Workshop Best Conversant Award</dd>
+    <dt>2026</dt><dd>Kanazawa Gakuin University President’s Award, twice (academic excellence; outstanding extracurricular activities)</dd>
+    <dt>2022 – 2026</dt><dd>Kanazawa Gakuin University KG Scholarship recipient</dd>
+  </dl>
+
+  <h2>Outreach &amp; Extracurricular Activities</h2>
+  <dl class="cv">
+    <dt>2026.8 – 12</dt><dd>Research Assistant, Nara Prefecture University-Collaboration Program for SME Digitalization<br>
+      <span class="muted">Helping small and medium-sized businesses in Nara go digital</span></dd>
+    <dt>2024.9.29</dt><dd>Teaching Assistant, “Fun Network Lab: The World of Digital Messages with Packet Tracer”<br>
+      <span class="muted">STEAM course, Hokuriku University / Ishikawa Central Urban Area university collaborative research project</span></dd>
+    <dt>2024.8.30</dt><dd>Teaching Assistant, drone flight experience<br>
+      <span class="muted">Kanazawa Gakuin University High School, DX Promotion Committee</span></dd>
+    <dt>2024.8.28</dt><dd>Teaching Assistant, DX High School program: high school–university DX practicum (drone programming)<br>
+      <span class="muted">Ishikawa Prefectural Nonoichi Meirin High School, organized by its Inquiry &amp; DX Promotion Office</span></dd>
+    <dt>2023 – 2024</dt><dd>Kanazawa Gakuin University KG Frontrunner Program (extracurricular course; supervisor: Yojiro Harie)
+      <div class="note">
+        One-on-one reading seminars with the supervisor outside regular classes, covering the math, machine learning and formal methods needed for research (six courses in total)
+        <dl class="terms">
+          <dt>2023 Spring</dt><dd>Deep learning (PyTorch)</dd>
+          <dt>2023 Fall</dt><dd>Sets and topology</dd>
+          <dt>2024 Spring</dt><dd>Natural language processing, model checking, linear algebra, calculus, preparing conference talks</dd>
+          <dt>2024 Fall</dt><dd>Natural language processing, model checking, differential equations, vector analysis, complex analysis, Fourier series and Laplace transforms, preparing conference talks</dd>
+        </dl>
+      </div></dd>
+  </dl>
+
+  <h2>Certifications</h2>
+  <ul class="plain">
+    <li>Fundamental Information Technology Engineer (IPA)</li>
+    <li>Information Security Management (IPA)</li>
+    <li>Hazardous Materials Engineer, Class B (Categories 1, 4 and 6)</li>
+    <li>Japan Chamber of Commerce Bookkeeping Test, Grade 3</li>
+  </ul>
+
+  <h2>Memberships</h2>
+  <ul class="plain">
+    <li>IEICE (Institute of Electronics, Information and Communication Engineers), Student Member</li>
+  </ul>
+
+  <h2>Published Apps</h2>
+  <div class="grid apps">
+    <div class="card app">
+      <a class="shot-link" href="https://apps.apple.com/jp/app/meg-route-%E3%82%81%E3%81%90%E3%83%AB%E3%83%BC%E3%83%88/id6802613980"><img class="shot" src="../apps/meg-route.jpg" alt="MEG Route screens: a map of hazardous spots along the route, AI suggestions for stops, and a list of tricky places" width="960" height="600" loading="lazy"></a>
+      <h3><a href="https://apps.apple.com/jp/app/meg-route-%E3%82%81%E3%81%90%E3%83%AB%E3%83%BC%E3%83%88/id6802613980">MEG Route - めぐルート</a></h3>
+      <p>A pre-drive app that shows the hazardous spots and places to stop along your route, all in one place, before you set out.</p>
+      <p class="where">App Store ・ <a href="../../index.html">Privacy Policy (Japanese)</a> ・ <a href="../../support.html">Support (Japanese)</a></p>
+    </div>
+    <div class="card app">
+      <a class="shot-link" href="https://chromewebstore.google.com/detail/fodipgpaenifggcjnbmnmkkljdkjecif"><img class="shot" src="../apps/unipa-assignment-sync.jpg" alt="UNIPA Assignment Sync screen: an assignment dashboard in Google Sheets" width="960" height="600" loading="lazy"></a>
+      <h3><a href="https://chromewebstore.google.com/detail/fodipgpaenifggcjnbmnmkkljdkjecif">UNIPA Assignment Sync</a></h3>
+      <p>A Chrome extension that pulls assignments from UNIPA (a university portal) and syncs them to Google Calendar and Google Sheets.</p>
+      <p class="where">Chrome Web Store ・ <a href="https://github.com/Ryosuke-On/unipa-assignment-sync">GitHub</a></p>
+    </div>
+  </div>
+
+  <h2>Projects</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>FrAIend Memory</h3>
+      <p>An AI diary that continues in chat: a local-LLM companion that speaks Kansai dialect and takes its time to reply (research prototype).</p>
+    </div>
+    <div class="card">
+      <h3><a href="https://github.com/Ryosuke-On/gramophonify">gramophonify</a></h3>
+      <p>A macOS app that makes audio sound like a gramophone recording from the 1880s–1930s.</p>
+    </div>
+    <div class="card">
+      <h3><a href="https://github.com/Ryosuke-On/Mac-Preview-Agent">Mac-Preview-Agent</a></h3>
+      <p>A macOS file viewer with a Claude Code chat sidebar.</p>
+    </div>
+    <div class="card">
+      <h3><a href="https://github.com/Ryosuke-On/japan-road-hazards">japan-road-hazards</a></h3>
+      <p>Data on multi-lane signalized intersections and railroad crossings in Japan, extracted from OpenStreetMap (ODbL).</p>
+    </div>
+    <div class="card">
+      <h3><a href="https://github.com/Ryosuke-On/cartoon-classics-radio-pipeline">cartoon-classics-radio</a></h3>
+      <p>A pipeline that turns public-domain Sousa marches into a 24-hour YouTube radio stream.</p>
+    </div>
+    <div class="card">
+      <h3><a href="https://github.com/Ryosuke-On/apple-music-discord">apple-music-discord</a></h3>
+      <p>Shows what you’re playing in Apple Music on Discord (macOS).</p>
+    </div>
+  </div>
+
+  <h2>Hobbies</h2>
+  <!-- games:start -->
+  <details class="hobby">
+    <summary>Games</summary>
+    <div class="legend">
+      <span class="se"><i></i>Indie</span>
+      <span class="hai"><i></i>Other</span>
+    </div>
+    <div class="chat">
+      <div class="bubble hai">
+        <div class="title">Dragon Quest V: Hand of the Heavenly Bride</div>
+        <div class="authors"><span class="tag">test of courage</span><span class="tag">slave labor</span><span class="tag">reunion</span>Square Enix</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Dragon Quest IV: Chapters of the Chosen</div>
+        <div class="authors"><span class="tag">omnibus</span><span class="tag">companions</span><span class="tag">dark swordsman</span>Square Enix</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">The Legend of Zelda: Majora's Mask 3D</div>
+        <div class="authors"><span class="tag">three days</span><span class="tag">the end</span><span class="tag">transformation</span>Nintendo</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">EarthBound</div>
+        <div class="authors"><span class="tag">diagonal</span><span class="tag">everyday life</span><span class="tag">quirky</span>Nintendo</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Mother 3 (Japan only)</div>
+        <div class="authors"><span class="tag">battles</span><span class="tag">family</span><span class="tag">tears</span>Nintendo</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">UNDERTALE</div>
+        <div class="authors"><span class="tag">meta</span><span class="tag">short</span><span class="tag">replays</span>Toby Fox</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">The Frog for Whom the Bell Tolls (Japan only)</div>
+        <div class="authors"><span class="tag">mash-ups</span><span class="tag">melancholy</span><span class="tag">humor</span>Nintendo</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">The Legend of Zelda: Breath of the Wild</div>
+        <div class="authors"><span class="tag">atmosphere</span><span class="tag">physicality</span><span class="tag">Hateno Village</span>Nintendo</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Mario Kart 8 Deluxe</div>
+        <div class="authors"><span class="tag">easygoing</span><span class="tag">big groups</span><span class="tag">anyone can play</span>Nintendo</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Splatoon 2</div>
+        <div class="authors"><span class="tag">DLC</span><span class="tag">subway</span><span class="tag">idols</span>Nintendo</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Super Mario Odyssey</div>
+        <div class="authors"><span class="tag">game feel</span><span class="tag">miniature world</span><span class="tag">density</span>Nintendo</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">DELTARUNE</div>
+        <div class="authors"><span class="tag">out of nowhere</span><span class="tag">midnight</span><span class="tag">characters</span>Toby Fox</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Game Dev Story</div>
+        <div class="authors"><span class="tag">cramming</span><span class="tag">daydreams</span><span class="tag">stats</span>Kairosoft</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Phoenix Wright: Ace Attorney Trilogy</div>
+        <div class="authors"><span class="tag">deduction</span><span class="tag">aha moments</span><span class="tag">human warmth</span>Capcom</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Dragon Quest XI S: Echoes of an Elusive Age – Definitive Edition</div>
+        <div class="authors"><span class="tag">grandeur</span><span class="tag">solitude</span><span class="tag">plot twists</span>Square Enix</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Pocket Academy</div>
+        <div class="authors"><span class="tag">human drama</span><span class="tag">stats</span><span class="tag">optimization</span>Kairosoft</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">A Short Hike</div>
+        <div class="authors"><span class="tag">speed</span><span class="tag">summit</span><span class="tag">every corner</span>adamgryu</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">The Legend of Zelda: Tears of the Kingdom</div>
+        <div class="authors"><span class="tag">passing through</span><span class="tag">a vast world</span><span class="tag">combinations</span>Nintendo</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Enjoy the Diner</div>
+        <div class="authors"><span class="tag">blank space</span><span class="tag">drink bar</span><span class="tag">yellow</span>Gekkan Shicchitai</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Xenoblade Chronicles X: Definitive Edition</div>
+        <div class="authors"><span class="tag">world</span><span class="tag">mechs</span><span class="tag">city</span>Nintendo</div>
+      </div>
+    </div>
+  </details>
+  <!-- games:end -->
+
+  <!-- music:start -->
+  <details class="hobby">
+    <summary>Music</summary>
+    <div class="legend">
+      <span class="se"><i></i>Winds &amp; orchestra</span>
+      <span class="hai"><i></i>Pops</span>
+    </div>
+    <div class="chat">
+      <div class="bubble se">
+        <div class="title">Feste Romane (Roman Festivals)</div>
+        <div class="authors">O. Respighi</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Kemono Yuku Hosomichi</div>
+        <div class="authors">Ringo Sheena & Hiroji Miyamoto</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Symphonic Rhapsody for Wind Orchestra</div>
+        <div class="authors">Hirokazu Fukushima</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">POP VIRUS<span class="tag-group"><span class="tag">Album</span></span></div>
+        <div class="authors">Gen Hoshino</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">String Quartet No. 2 in D major</div>
+        <div class="authors">A. Borodin / Quatuor Zahir</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Pictures at an Exhibition</div>
+        <div class="authors">M. Mussorgsky (orch. M. Ravel)</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Symphonie fantastique</div>
+        <div class="authors">H. Berlioz</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Advent: One-Winged Angel</div>
+        <div class="authors">Nobuo Uematsu</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">The Miraculous Mandarin</div>
+        <div class="authors">B. Bartók</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Retro</div>
+        <div class="authors">Masamicz Amano</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">KICK BACK</div>
+        <div class="authors">Kenshi Yonezu</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Fuyu no Hana</div>
+        <div class="authors">Hiroji Miyamoto</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Smeared Canvas</div>
+        <div class="authors">Deep Cut</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Liquid Sunshine</div>
+        <div class="authors">Squid Sisters feat. Ian BGM</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">The Inn of the Sixth Happiness (Suite)</div>
+        <div class="authors">M. Arnold</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Rapsodie espagnole</div>
+        <div class="authors">M. Ravel</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Fantasia on a Bach Chorale Prelude (“O Mensch, bewein’ dein’ Sünde groß”)</div>
+        <div class="authors">Yasuhide Ito</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">“Sonata Classica” for Wind Ensemble</div>
+        <div class="authors">Yasuhide Ito</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">The Magic Flute</div>
+        <div class="authors">W. A. Mozart</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Sayonara, Mata Itsuka!</div>
+        <div class="authors">Kenshi Yonezu</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">LOST CORNER<span class="tag-group"><span class="tag">Album</span></span></div>
+        <div class="authors">Kenshi Yonezu</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Symphony No. 1</div>
+        <div class="authors">J. Brahms</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Martian</div>
+        <div class="authors">Yorushika</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">IRIS OUT</div>
+        <div class="authors">Kenshi Yonezu</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">JANE DOE</div>
+        <div class="authors">Kenshi Yonezu, Hikaru Utada</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Piano Concerto No. 1</div>
+        <div class="authors">D. Shostakovich</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">La valse</div>
+        <div class="authors">M. Ravel</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Danzare la Tarantella</div>
+        <div class="authors">Kei Misawa</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Night Routine</div>
+        <div class="authors">Tatsuya Kitani</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Finale for Wind Ensemble</div>
+        <div class="authors">Yasuhide Ito</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Final Draft</div>
+        <div class="authors">Tatsuya Kitani</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Higi IV “March”</div>
+        <div class="authors">Akira Nishimura</div>
+      </div>
+      <div class="bubble hai">
+        <div class="title">Tsukue Sasuru</div>
+        <div class="authors">Haruka Aoki</div>
+      </div>
+      <div class="bubble se">
+        <div class="title">Daphnis et Chloé, Suite No. 2</div>
+        <div class="authors">M. Ravel</div>
+      </div>
+    </div>
+  </details>
+  <!-- music:end -->
+  <!-- band:start -->
+  <details class="hobby">
+    <summary>Concert Band</summary>
+    <div class="legend">
+      <span class="se"><i></i>Original works (for band, winds and percussion)</span>
+      <span class="hai"><i></i>Arrangements</span>
+    </div>
+    <div class="chat">
+      <div class="date-label"><span>2015</span></div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">The Liberty Bell</div>
+        <div class="authors"><span class="tag">Test piece</span>J. P. Sousa</div>
+        <div class="venue">Chubu Japan Band Competition, Final – Silver</div>
+      </div>
+        <span class="time">Oct</span>
+      </div>
+      <div class="bubble se">
+        <div class="title">Higi III – Heterophony for Whirl Dance</div>
+        <div class="authors"><span class="tag">Test piece</span>Akira Nishimura</div>
+        <div class="venue">All-Japan Band Competition – Silver</div>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Chingis Khan – The Land of Great Promise</div>
+        <div class="authors">Eiji Suzuki</div>
+        <div class="venue">All-Japan Band Competition – Silver</div>
+      </div>
+        <span class="time">Oct</span>
+      </div>
+      <div class="date-label"><span>2016</span></div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Tsuchigumo Legend</div>
+        <div class="authors">Tomohito Matsushita</div>
+        <div class="venue">Hokuriku Ensemble Contest – Silver</div>
+      </div>
+        <span class="time">Feb</span>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">In a Spanish Market</div>
+        <div class="authors"><span class="tag">Test piece</span>Masakazu Yamamoto</div>
+        <div class="venue">Hokuriku Band Competition – Gold</div>
+      </div>
+        <span class="time">Aug</span>
+      </div>
+      <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">Gayane: Dance of Friendship, Ayshe’s Loneliness, Sabre Dance, Harvest Festival</div>
+        <div class="authors">A. Khachaturian</div>
+        <div class="venue">Hokuriku Band Competition – Gold</div>
+      </div>
+        <span class="time">Aug</span>
+      </div>
+      <div class="date-label"><span>2017</span></div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">First Suite in E-flat for Military Band</div>
+        <div class="authors">G. Holst</div>
+        <div class="venue">Concert</div>
+      </div>
+        <span class="time">Mar</span>
+      </div>
+      <div class="bubble se">
+        <div class="title">Scherzando</div>
+        <div class="authors"><span class="tag">Test piece</span>Daisuke Ehara</div>
+        <div class="venue">Hokuriku Band Competition – Silver</div>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Ten rai mu bou</div>
+        <div class="authors">Masamicz Amano</div>
+        <div class="venue">Hokuriku Band Competition – Silver</div>
+      </div>
+        <span class="time">Aug</span>
+      </div>
+      <div class="date-label"><span>2018</span></div>
+      <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">Ma mère l’Oye</div>
+        <div class="authors"><span class="tag">Commissioned arr. premiere</span>M. Ravel</div>
+        <div class="venue">Concert</div>
+      </div>
+        <span class="time">Mar</span>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Under the Double Eagle</div>
+        <div class="authors"><span class="tag">Test piece</span>J. F. Wagner</div>
+        <div class="venue">Chubu Japan Band Competition, Ishikawa round – Silver</div>
+      </div>
+        <span class="time">Jun</span>
+      </div>
+      <div class="bubble se">
+        <div class="title">Concert March “Step to the Rainbow”</div>
+        <div class="authors"><span class="tag">Test piece</span>Mikio Gohma</div>
+        <div class="venue">Hokuriku Band Competition – Silver</div>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Eternal Memoir – Saga of the Lucky Dragon</div>
+        <div class="authors">Hirokazu Fukushima</div>
+        <div class="venue">Hokuriku Band Competition – Silver</div>
+      </div>
+        <span class="time">Aug</span>
+      </div>
+      <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">Euphonium Concerto</div>
+        <div class="authors">J. Horovitz</div>
+        <div class="venue">Concert</div>
+      </div>
+        <span class="time">Sep</span>
+      </div>
+      <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">Prelude from Cello Suite No. 1 in G major, BWV 1007</div>
+        <div class="authors">J. S. Bach</div>
+        <div class="venue">Chubu Japan Solo & Ensemble Contest, Ishikawa round – Bronze</div>
+      </div>
+        <span class="time">Nov</span>
+      </div>
+      <div class="date-label"><span>2019</span></div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Elegy from Sado-Jowa</div>
+        <div class="authors">Tomohito Matsushita</div>
+        <div class="venue">Ishikawa Ensemble Contest – Gold</div>
+      </div>
+        <span class="time">Jan</span>
+      </div>
+      <div class="bubble se">
+        <div class="title">March “Green Forest”</div>
+        <div class="authors"><span class="tag">Test piece</span>Jun-ichi Naito</div>
+        <div class="venue">Ishikawa Band Competition for New Members – Silver</div>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">The Rebirth</div>
+        <div class="authors">Hiroshi Hoshina</div>
+        <div class="venue">Ishikawa Band Competition for New Members – Silver</div>
+      </div>
+        <span class="time">Feb</span>
+      </div>
+      <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">Selections from The Hunchback of Notre Dame</div>
+        <div class="authors">A. Menken</div>
+        <div class="venue">Concert</div>
+      </div>
+        <span class="time">Apr</span>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Les trois notes du Japon</div>
+        <div class="authors">Toshio Mashima</div>
+        <div class="venue">Concert</div>
+      </div>
+        <span class="time">May</span>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Flying Cadets</div>
+        <div class="authors"><span class="tag">Test piece</span>K. L. King</div>
+        <div class="venue">Chubu Japan Band Competition, Ishikawa round – Silver</div>
+      </div>
+        <span class="time">Jun</span>
+      </div>
+      <div class="bubble se">
+        <div class="title">March “April Leaf”</div>
+        <div class="authors"><span class="tag">Test piece</span>Yusuke Kondo</div>
+        <div class="venue">Hokuriku Band Competition – Silver</div>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Cyclosis for Symphonic Band</div>
+        <div class="authors">Yoshio Nakahashi</div>
+        <div class="venue">Hokuriku Band Competition – Silver</div>
+      </div>
+        <span class="time">Aug</span>
+      </div>
+      <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">Oboe Concerto</div>
+        <div class="authors"><span class="tag">Commissioned arr. premiere</span>W. A. Mozart</div>
+        <div class="venue">Concert</div>
+      </div>
+        <span class="time">Sep</span>
+      </div>
+      <div class="date-label"><span>2020</span></div>
+      <div class="bubble se">
+        <div class="title">March “April May”</div>
+        <div class="authors"><span class="tag">Test piece</span>Masao Yabe</div>
+        <div class="venue">Ishikawa Band Competition for New Members – Silver</div>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Sinfonietta No. 3 “Distance of Sounds”</div>
+        <div class="authors">Hirokazu Fukushima</div>
+        <div class="venue">Ishikawa Band Competition for New Members – Silver</div>
+      </div>
+        <span class="time">Feb</span>
+      </div>
+      <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">Gunjo (Azure)<span class="tag-group"><span class="tag">Lead video producer</span></span></div>
+        <div class="authors"><span class="tag">Commissioned arr. premiere</span>Miki Oda</div>
+        <div class="venue">Ishikawa Band Concert Online Vote – 2nd place</div>
+      </div>
+        <span class="time">Aug</span>
+      </div>
+      <div class="date-label"><span>2022</span></div>
+      <div class="bubble se">
+        <div class="title">Yamagata Fantasy for Band</div>
+        <div class="authors"><span class="tag">Test piece</span>Kunihiro Sugiura</div>
+        <div class="venue">Ishikawa Band Competition – Silver</div>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">The Last Letter from Murdoch</div>
+        <div class="authors">Masanori Taruya</div>
+        <div class="venue">Ishikawa Band Competition – Silver</div>
+      </div>
+        <span class="time">Jul</span>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Arsenal</div>
+        <div class="authors">J. Van der Roost</div>
+        <div class="venue">Concert</div>
+      </div>
+        <span class="time">Nov</span>
+      </div>
+      <div class="date-label"><span>2023</span></div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Concert March “Bright Morning”</div>
+        <div class="authors"><span class="tag">Test piece</span>Keigo Makino</div>
+        <div class="venue">Ishikawa Band Competition – Silver</div>
+      </div>
+        <span class="time">Jul</span>
+      </div>
+      <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">Selections from Turandot</div>
+        <div class="authors">G. Puccini</div>
+        <div class="venue">Ishikawa Band Competition – Silver</div>
+      </div>
+        <span class="time">Jul</span>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Two Sonatas<span class="tag-group"><span class="tag">Coach</span></span></div>
+        <div class="authors">D. Speer</div>
+        <div class="venue">Ishikawa Ensemble Contest – Silver</div>
+      </div>
+        <span class="time">Dec</span>
+      </div>
+      <div class="date-label"><span>2024</span></div>
+      <div class="msg hai">
+      <div class="bubble hai">
+        <div class="title">London Trio No. 1</div>
+        <div class="authors">J. Haydn (arr. Ryosuke Ono)</div>
+        <div class="venue">Ishikawa Band Competition for New Members – Excellence Award</div>
+      </div>
+        <span class="time">Jan</span>
+      </div>
+      <div class="msg se">
+      <div class="bubble se">
+        <div class="title">Ventus<span class="tag-group"><span class="tag">Coach</span></span></div>
+        <div class="authors">Rika Ishige</div>
+        <div class="venue">Hokuriku Ensemble Contest – Bronze</div>
+      </div>
+        <span class="time">Feb</span>
+      </div>
+    </div>
+  </details>
+  <!-- band:end -->
+
+  <footer>© 2026 Ryosuke Ono</footer>
+</main>
+</body>
+</html>
